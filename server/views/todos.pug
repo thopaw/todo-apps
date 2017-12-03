@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+  div(class='well')
+    h2 Todos
+    ul(class='')
+      each todo in todos
+        li
+          span(class='label label-default')= todo.id
+          |
+          | 
+          span= todo.text

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "./node_modules/.bin/nodemon",
-    "start": "node build/app.js"
+    "start": "node build/app.js",
+    "docker": "docker build  -t todo-app-node .",
+    "start-docker": "docker run -d --rm --name todo-app-node -p 8000:8000 todo-app-node"
   },
   "keywords": [
     "nodejs",

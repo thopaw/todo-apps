@@ -1,5 +1,9 @@
 extends layout.pug
 
+block breadcrumb
+  +breadcrumb("Home","/")
+  +breadcrumb("Todos")
+
 block content
   div(class='well')
     h2 Todos

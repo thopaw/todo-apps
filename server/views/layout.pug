@@ -1,4 +1,12 @@
 doctype html
+
+mixin breadcrumb(name, link)
+  li.breadcrumb-item(class=link ? "" : "active")
+    if link
+      a(href=link)= name
+    else
+      span= name
+
 html
   head
     title= title
@@ -9,4 +17,8 @@ html
       link(rel='stylesheet',href='css/bootstrap.min.css')
   body
     div(class='container')
+      div
+        ol.breadcrumb
+          block breadcrumb
+            +breadcrumb("Home", "/")
       block content

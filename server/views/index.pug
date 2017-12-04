@@ -1,5 +1,8 @@
 extends layout.pug
 
+block breadcrumb
+  +breadcrumb("Home")
+
 block content
   div(class='jumbotron')
     h1= heading

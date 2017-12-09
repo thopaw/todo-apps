@@ -7,10 +7,15 @@ block breadcrumb
 block content
   div(class='well')
     h2 Todos
-    ul(class='')
+    ul(class='list-group')
       each todo in todos
-        li
-          span(class='label label-default')= todo.id
+        a.list-group-item(href="/todos/"+todo.id)
+          span.badge= todo.id
+          case todo.done
+            when true
+              span(class="glyphicon glyphicon-check")
+            default
+              span(class="glyphicon glyphicon-unchecked")
           |
-          | 
+          |
           span= todo.text

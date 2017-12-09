@@ -1,14 +1,43 @@
+var Todo = require('./Todo.js')
+
+let items = [
+  new Todo({
+      id: 1,
+      text: "Here is some text",
+      done: false
+  }),
+  new Todo({
+    id: 2,
+    text: "2nd Todo text",
+    done: true
+  }),
+  new Todo({
+    id: 3,
+    text: "3rd Todo - some text",
+    done: false
+  })
+]
+
 module.exports = {
+
   todos : function() {
-    return [
-      {
-        id: 1,
-        text: "Todo text #1"
-      },
-      {
-        id: 2,
-        text: "2nd Todo Text"
-      }
-    ]
+    return items;
+  },
+
+  todo : function(id) {
+    console.log("Request Todo ", id)
+    var todo = items.filter((item) => item.id === Number(id))[0]
+    return todo;
+  },
+  remove: function(id) {
+    let length = items.length
+    items = items.filter(item => item.id !== Number(id))
+    return length > items.length
+  },
+  save: function(todo) {
+    let newId = items.length + 1
+    todo.id = newId
+    items.push(todo)
+    return newId
   }
 }

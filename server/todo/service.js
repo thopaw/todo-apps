@@ -29,13 +29,14 @@ module.exports = {
     var todo = items.filter((item) => item.id === Number(id))[0]
     return todo;
   },
-  remove: function(id) {
+  delete: function(id) {
     let length = items.length
     items = items.filter(item => item.id !== Number(id))
     return length > items.length
   },
   save: function(todo) {
-    let newId = items.length + 1
+    let ids = items.map(it => it.id)
+    let newId = Math.max(...ids) + 1
     todo.id = newId
     items.push(todo)
     return newId

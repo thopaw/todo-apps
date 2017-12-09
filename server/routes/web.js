@@ -4,12 +4,21 @@ var router = express.Router()
 var todoService = require('../todo/service.js')
 var Todo = require('../todo/Todo.js')
 
-router.get('/', function (req, res) {
-  res.render('index',{
-    'title': 'Todo App - NodeJS',
-    'heading': 'Nodo Application with NodeJS'
-  });
-});
+// Extract Todo, when ID is in path
+router.param("todo_id", function(req, res, next, todo_id) {
+  console.log("Param - Todo ID - "+todo_id)
+  req.todo = todoService.todo(todo_id)
+  return next()
+})
+
+router.route("/")
+
+  .get(function (req, res) {
+    res.render('index',{
+      'title': 'Todo App - NodeJS',
+      'heading': 'Nodo Application with NodeJS'
+    })
+  })
 
 router.route('/todos')
 
@@ -34,23 +43,25 @@ router.route('/todos/:todo_id')
 
   // Gets the form of an Todo
   .get(function (req, res) {
-    var todo_id = req.params.todo_id
-    var todo = todoService.todo(todo_id)
     res.render('todo',{
       'title': 'Todo App - NodeJS',
-      'heading': 'Todo - ID '+todo.id,
-      'todo': todo
+      'heading': 'Todo - ID '+req.todo.id,
+      'todo': req.todo
     });
   })
 
   // Edits a Todo
   .post(function(req, res) {
-    var todo_id = req.params.todo_id
-    var todo = todoService.todo(todo_id)
-    console.log("Body", req.body)
+    var todo = req.todo
     todo.text = req.body.text
     todo.done = req.body.done === "on"
     todoService.update(todo)
+    res.redirect("/todos")
+  })
+
+router.route('/todos/:todo_id/delete')
+  .post(function(req, res) {
+    todoService.delete(req.todo.id)
     res.redirect("/todos")
   })
 

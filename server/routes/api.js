@@ -50,7 +50,7 @@ router.route('/todos/:todo_id')
   // Delete a Todo
   .delete(function(req, res) {
     let id = req.params.todo_id;
-    if(todoService.remove(id)) {
+    if(todoService.delete(id)) {
       res.send("deleted")
     } else {
       res.status(404).send("Not Found id: " + id);

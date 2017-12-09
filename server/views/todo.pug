@@ -6,7 +6,13 @@ block breadcrumb
   +breadcrumb("Todo "+todo.id)
 
 block content
-  div(class='well')
-    h2= heading
-    include includes/todo-form.pug
-    +todo-form(todo.id, todo.text, todo.done)
+  .panel(class="panel-primary")
+    .panel-heading
+      h2= heading
+    .panel-body
+      include includes/todo-form.pug
+      +todo-form(todo.id, todo.text, todo.done)
+      .text-right
+        form(action="/todos/"+todo.id+"/delete" method="post")
+          button.btn(class="btn-danger" type="submit") Delete
+    

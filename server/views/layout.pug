@@ -15,10 +15,21 @@ html
       script(type='text/javascript', src='jquery.min.jsn')
     block style
       link(rel='stylesheet',href='css/bootstrap.min.css')
+      link(rel='stylesheet',href='css/styles.css')
+    if process.env.DEBUG_LIVE_RELOAD
+      script(type='text/javascript', src="http://localhost:35729/livereload.js?snipver=1")
+      
   body
-    div(class='container')
-      div
+    div(class="footer navbar navbar-default navbar-fixed-top")
+      .container
+    
+    .container
+      div#breadcrumb
         ol.breadcrumb
           block breadcrumb
             +breadcrumb("Home", "/")
       block content
+      div(id="footer", class="navbar navbar-default navbar-fixed-bottom")
+        .container 
+          block footer
+            p Here is a cool footer missing

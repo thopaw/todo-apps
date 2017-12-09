@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 
 var todoService = require('../todo/service.js')
+var Todo = require('../todo/Todo.js')
 
 router.get('/', function (req, res) {
   res.render('index',{
@@ -10,13 +11,24 @@ router.get('/', function (req, res) {
   });
 });
 
-router.get('/todos', function (req, res) {
-  res.render('todos',{
-    'title': 'Todo App - NodeJS',
-    'heading': 'Nodo Application with NodeJS',
-    'todos': todoService.todos()
-  });
-});
+router.route('/todos')
+
+  .get(function (req, res) {
+    res.render('todos',{
+      'title': 'Todo App - NodeJS',
+      'heading': 'Nodo Application with NodeJS',
+      'todos': todoService.todos()
+    });
+  })
+
+  .post(function(req, res) {
+    var todo = new Todo({
+      text: req.body.text,
+      done: req.body.done
+    })
+    todoService.save(todo)
+    res.redirect("/todos")
+  })
 
 router.route('/todos/:todo_id')
 

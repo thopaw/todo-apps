@@ -20,16 +20,18 @@ html
       script(type='text/javascript', src="http://localhost:35729/livereload.js?snipver=1")
       
   body
-    div(class="footer navbar navbar-default navbar-fixed-top")
+    div#header(class="navbar navbar-default navbar-fixed-top")
+  
+    div#breadcrumb
       .container
-    
-    .container
-      div#breadcrumb
         ol.breadcrumb
           block breadcrumb
             +breadcrumb("Home", "/")
-      block content
-      div(id="footer", class="navbar navbar-default navbar-fixed-bottom")
+      
+      .container
+        block content
+      
+      div#footer(class="navbar navbar-default navbar-fixed-bottom")
         .container 
           block footer
             p Here is a cool footer missing

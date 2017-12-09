@@ -39,5 +39,10 @@ module.exports = {
     todo.id = newId
     items.push(todo)
     return newId
+  },
+  update: function(todo) {
+    var todoRef = this.todo(todo.id)
+    todoRef.text = todo.text
+    todoRef.done = todo.done
   }
 }

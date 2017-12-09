@@ -1,0 +1,17 @@
+
+mixin todo-form(id, text, done)
+  - var url = id ? "/todos/"+id : "/todos" 
+  form(method="POST" action=url)
+    .form-group
+      label(for=text) Text
+      textarea.form-control(name="text", placeholder="Text of the todo")= text
+    .form-check
+      label.form-check-label
+        input.form-check-input(name="done" type="checkbox", checked=done)
+        | 
+        | Done
+    .form-group(class="text-right")
+      button(class="btn btn-default" type="reset") Reset
+      |
+      |
+      button(class="btn btn-primary" type="Submit") Submit

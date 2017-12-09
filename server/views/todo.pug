@@ -8,14 +8,5 @@ block breadcrumb
 block content
   div(class='well')
     h2= heading
-    form
-      .form-group
-        label(for="text") Text:
-        textarea.form-control(name=todo[text], placeholder="Text of the todo")= todo.text
-      .checkbox
-        label
-          input(type="checkbox", checked=todo.done)
-          | Done
-          
-      
-    
+    include includes/todo-form.pug
+    +todo-form(todo.id, todo.text, todo.done)

@@ -3,13 +3,6 @@ var router = express.Router()
 
 var todoService = require('../todo/service.js')
 
-router.use(function timeLog (req, res, next) {
-  console.log("Handling Request - ", req.path)
-  console.log("params ", req.params)
-
-  next()
-})
-
 router.get('/', function (req, res) {
   res.render('index',{
     'title': 'Todo App - NodeJS',
@@ -25,14 +18,28 @@ router.get('/todos', function (req, res) {
   });
 });
 
-router.get('/todos/:todo_id', function (req, res) {
-  var todo_id = req.params.todo_id
-  var todo = todoService.todo(todo_id)
-  res.render('todo',{
-    'title': 'Todo App - NodeJS',
-    'heading': 'Todo - ID '+todo.id,
-    'todo': todo
-  });
-});
+router.route('/todos/:todo_id')
+
+  // Gets the form of an Todo
+  .get(function (req, res) {
+    var todo_id = req.params.todo_id
+    var todo = todoService.todo(todo_id)
+    res.render('todo',{
+      'title': 'Todo App - NodeJS',
+      'heading': 'Todo - ID '+todo.id,
+      'todo': todo
+    });
+  })
+
+  // Edits a Todo
+  .post(function(req, res) {
+    var todo_id = req.params.todo_id
+    var todo = todoService.todo(todo_id)
+    console.log("Body", req.body)
+    todo.text = req.body.text
+    todo.done = req.body.done === "on"
+    todoService.update(todo)
+    res.redirect("/todos")
+  })
 
 module.exports = router

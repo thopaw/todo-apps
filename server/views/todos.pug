@@ -5,17 +5,35 @@ block breadcrumb
   +breadcrumb("Todos")
 
 block content
-  div(class='well')
-    h2 Todos
-    ul(class='list-group')
-      each todo in todos
-        a.list-group-item(href="/todos/"+todo.id)
-          span.badge= todo.id
-          case todo.done
-            when true
-              span(class="glyphicon glyphicon-check")
-            default
-              span(class="glyphicon glyphicon-unchecked")
-          |
-          |
-          span= todo.text
+  .row
+    .col-md-6
+      .panel(class="panel-primary")
+        .panel-heading
+          h2 Todos
+        .panel-body
+          ul(class='list-group')
+            each todo in todos
+              a.list-group-item(href="/todos/"+todo.id)
+                span.badge= todo.id
+                case todo.done
+                  when true
+                    del 
+                      span(class="glyphicon glyphicon-check")
+                      |
+                      |
+                      span= todo.text
+                  default
+                    em
+                      span(class="glyphicon glyphicon-unchecked")
+                      |
+                      |
+                      span= todo.text
+                
+    .col-md-6
+      .panel(class="panel-default")
+        .panel-heading
+          h2 New Todo
+        .panel-body
+          include includes/todo-form.pug
+          +todo-form()
+        

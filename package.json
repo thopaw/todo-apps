@@ -4,7 +4,7 @@
   "description": "todo application",
   "main": "index.js",
   "scripts": {
-    "dev": "DEBUG_LIVE_RELOAD=true nodemon & livereload ./server/ --wait 250 --exts 'js,pug,css'",
+    "dev": "DEBUG_LIVE_RELOAD=true nodemon & livereload ./server/ --wait 400 --exts 'js,pug,css'",
     "start": "node build/app.js",
     "docker": "docker build  -t todo-app-node .",
     "start-docker": "docker run -d --rm --name todo-app-node -p 8000:8000 todo-app-node"

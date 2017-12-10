@@ -1,16 +1,8 @@
-# todo-app-node
+# Todo Apps
 
-Simple Todo app implemented with
- - NodeJS
- - ExpressJS
- - Pug
+Here I try several languages and frameworks on simple
+Todo application.
 
-As development tools there is
- - nodemon
- - livereload
- - concurrently (to run nodemon and livereload in parallel)
-   _Do not work properly_
-- morgan -- to log requests
+## `todo-app-node`
 
-# open issues
- - browserify
+Node.js implementation (todo-app-node/README.md)

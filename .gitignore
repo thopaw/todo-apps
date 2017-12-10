@@ -2,6 +2,7 @@ node_modules/
 build/
 
 .project
+.idea/
 .classpath
 .settings
 

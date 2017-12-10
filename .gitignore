@@ -1,8 +1,13 @@
-/*/node_modules
-/*/build
+node_modules/
+build/
 
 .project
 .classpath
 .settings
 
 target/
+
+bin/
+logs/
+*.log
+.cache*

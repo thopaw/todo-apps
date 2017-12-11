@@ -4,10 +4,20 @@ var router = express.Router()
 var todoService = require('../todo/service.js')
 var Todo = require('../todo/Todo.js')
 
-router.use(function timeLog (req, res, next) {
-  console.log(req.method+ " - "+ req.originalUrl);
-  next();
-});
+// Extract Todo, when ID is in path
+router.param("todo_id", function(req, res, next, todo_id) {
+  console.log("Param - Todo ID - "+todo_id)
+  let todo = todoService.todo(todo_id)
+  if(!todo) {
+    console.log("No todo found with id " + todo_id)
+    return res.status(404).json({
+      id: todo_id,
+      message: "todo not found"
+    })
+  }
+  req.todo = todo
+  return next()
+})
 
 
 router.route('/todos')
@@ -37,20 +47,20 @@ router.route('/todos/:todo_id')
 
   // Get a specific todo
   .get(function(req, res) {
-    let id = req.params.todo_id;
-    let todo = todoService.todo(id);
-    if(todo) {
-      res.type('application/json')
-      res.json(todo)
-    } else {
-      res.status(404).send("Not Found id: " + id);
-    }
+    res.type('application/json')
+    res.json(req.todo)
+  })
+
+  .put(function(req, res){
+    req.todo.text = req.body.text
+    req.todo.done = req.body.done
+    todo.todoService.update(req.todo)
+    res.status(200).send("Updated")
   })
 
   // Delete a Todo
   .delete(function(req, res) {
-    let id = req.params.todo_id;
-    if(todoService.delete(id)) {
+    if(todoService.delete(req.todo.id)) {
       res.send("deleted")
     } else {
       res.status(404).send("Not Found id: " + id);

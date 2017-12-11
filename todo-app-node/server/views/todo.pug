@@ -14,5 +14,8 @@ block content
       +todo-form(todo.id, todo.text, todo.done)
       .text-right
         form(action="/todos/"+todo.id+"/delete" method="post")
+          a.btn(class="btn-warning" href="/todos") Cancel
+          |
+          |
           button.btn(class="btn-danger" type="submit") Delete
     

@@ -12,3 +12,5 @@ bin/
 logs/
 *.log
 .cache*
+
+*.iml

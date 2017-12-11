@@ -7,7 +7,14 @@ var Todo = require('../todo/Todo.js')
 // Extract Todo, when ID is in path
 router.param("todo_id", function(req, res, next, todo_id) {
   console.log("Param - Todo ID - "+todo_id)
-  req.todo = todoService.todo(todo_id)
+  let todo = todoService.todo(todo_id)
+  if(!todo) {
+    console.log("No todo found with id " + todo_id)
+    return res.render('not_found',{
+      id: todo_id
+    })
+  }
+  req.todo = todo
   return next()
 })
 
@@ -23,17 +30,19 @@ router.route("/")
 router.route('/todos')
 
   .get(function (req, res) {
+    let todos = todoService.todos()
+    console.log("Todos", todos)
     res.render('todos',{
       'title': 'Todo App - NodeJS',
       'heading': 'Nodo Application with NodeJS',
-      'todos': todoService.todos()
+      'todos': todos
     });
   })
 
   .post(function(req, res) {
     var todo = new Todo({
       text: req.body.text,
-      done: req.body.done
+      done: req.body.done === 'on'
     })
     todoService.save(todo)
     res.redirect("/todos")

@@ -1,0 +1,18 @@
+extends layout.pug
+
+block breadcrumb
+  +breadcrumb("Home","/")
+
+block content
+  .panel(class="panel-danger")
+    .panel-heading
+      h2 Todo not found
+    .panel-body
+      span(style={"font-size": "50pt"}) 😢
+      p
+      |  Sorry, we could not find a Todo with id        
+      code= id
+      | !
+        
+        
+    

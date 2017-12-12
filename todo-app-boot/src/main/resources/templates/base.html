@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Basic Templates</title>
+</head>
+<body>
+
+	<div th:fragment="webresources">
+
+
+		<!-- Common styles and scripts -->
+		<link rel="stylesheet"
+			th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+		<link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+		<script th:src="@{http://localhost:35729/livereload.js?snipver=1}"></script>
+		<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+	</div>
+
+	<ol th:fragment="breadcrumb" class="breadcrumb" th:if="${breadcrumbs}">
+		<li th:each="crumb : ${breadcrumbs}" class="breadcrumb-item"  th:classappend="${#strings.isEmpty(crumb.url)}? 'active'">
+			<a th:if="${crumb.url}" th:href="@{${crumb.url}}" th:text="${crumb.text}"></a>
+			<span th:unless="${crumb.url}" th:text="${crumb.text}">Text</span>
+		</li>
+	</ol>
+
+
+
+
+</body>
+
+</html>

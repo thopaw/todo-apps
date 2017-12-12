@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title th:text="${title}">Title</title>
+
+<th:block th:replace="base :: webresources" />
+
+</head>
+<body>
+
+	<div class="container">
+	
+		<ol th:replace="base :: breadcrumb">
+			<li class="breadcrumb-item">Test</li>
+		</ol>
+			
+
+
+	</div>
+
+</body>
+</html>

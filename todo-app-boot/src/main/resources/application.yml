@@ -1,0 +1,6 @@
+server:
+  display-name: Todo-Application
+  
+spring:
+  application:
+    name: Todo-Application

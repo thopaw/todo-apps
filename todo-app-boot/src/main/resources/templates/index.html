@@ -1,0 +1,24 @@
+<html>
+
+<head>
+	<title th:text="${title}">Title</title>
+
+	<th:block th:replace="base :: webresources"/>
+
+</head>
+<body>
+	<div class="container">
+		
+		<ol th:replace="base :: breadcrumb">
+			<li class="breadcrumb-item">Test</li>
+		</ol>
+	
+		<div class="jumbotron">
+			<h1 th:text="${@environment.getProperty('spring.application.name')}">Application
+				Name</h1>
+			Click on <a class="btn btn-primary" th:href="@{/todos}">Todos</a> to see the complete list.
+
+		</div>
+	</div>
+</body>
+</html>

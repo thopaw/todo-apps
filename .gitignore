@@ -5,6 +5,8 @@ build/
 .idea/
 .classpath
 .settings
+.jshintrc
+.npmignore
 
 target/
 
@@ -12,5 +14,6 @@ bin/
 logs/
 *.log
 .cache*
+
 
 *.iml

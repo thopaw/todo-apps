@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import name.pawlitzki.boot.todoapp.model.Todo;
+import name.pawlitzki.boot.todoapp.model.TodoNotFoundException;
 
 @Repository
 public class SimpleTodoRepo implements TodoRepo {
@@ -24,7 +25,7 @@ public class SimpleTodoRepo implements TodoRepo {
 
 		save(new Todo(1L, "Simple Todo 1", false));
 		save(new Todo(2L, "buy food for weekend", true));
-		save(new Todo(3L, "clean the kittchen", false));
+		save(new Todo(3L, "clean the kittchen", true));
 	}
 
 	@Override
@@ -42,5 +43,14 @@ public class SimpleTodoRepo implements TodoRepo {
 		log.info("Save TODO");
 		Assert.notNull(todo, "todo may not be null");
 		todos.put(todo.getId(), todo);
+	}
+
+	@Override
+	public void update(Long todoId, Todo todo) {
+		if (!todos.containsKey(todoId)) {
+			throw new TodoNotFoundException(todoId);
+		}
+		save(new Todo(todoId, todo.getText(), todo.isDone()));
+
 	}
 }

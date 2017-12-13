@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title th:text="${title}">Title</title>
+
+<th:block th:replace="base :: webresources" />
+
+</head>
+<body>
+
+	<div class="container">
+
+		<ol th:replace="base :: breadcrumb">
+			<li class="breadcrumb-item">Test</li>
+		</ol>
+
+		<div class="row">
+			<div class="panel panel-primary" th:if="${todo}">
+
+				<div class="panel-heading">
+					Todo:
+					<span th:text="${todo.text}">Todo</span>
+				</div>
+				<div class="panel-body">
+					<form method="post" th:action="@{/todos/{id}(id=${todo.id})}" th:object="${todo}">
+						<div class="form-group">
+							<label for="text">Text</label>
+							<textarea class="form-control" name="text"
+								th:field="*{text}" placeholder="Text of the todo"></textarea>
+						</div>
+						<div class="form-check">
+							<label class="form-check-label">Done</label>
+							<input type="checkbox" name="done" th:field="*{done}"/>
+						</div>
+
+						<div class="form-group text-right">
+							<button type="reset" class="btn btn-warning">Reset</button>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

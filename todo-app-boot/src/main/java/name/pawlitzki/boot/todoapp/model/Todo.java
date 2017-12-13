@@ -4,9 +4,13 @@ import org.springframework.util.Assert;
 
 public class Todo {
 
-	private final Long id;
-	private final String text;
-	private final boolean done;
+	private Long id;
+	private String text;
+	private boolean done;
+
+	public Todo() {
+
+	}
 
 	public Todo(Long id, String text, boolean done) {
 		super();
@@ -26,6 +30,14 @@ public class Todo {
 
 	public String getText() {
 		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
 	}
 
 }

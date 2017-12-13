@@ -19,6 +19,10 @@
 		<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 
 	</div>
+	
+	<ul th:fragment="messages" th:if="${messages}">
+		<li th:each="message: ${messages}" th:text="${message}">Message</li>		
+	</ul>
 
 	<ol th:fragment="breadcrumb" class="breadcrumb" th:if="${breadcrumbs}">
 		<li th:each="crumb : ${breadcrumbs}" class="breadcrumb-item"  th:classappend="${#strings.isEmpty(crumb.url)}? 'active'">

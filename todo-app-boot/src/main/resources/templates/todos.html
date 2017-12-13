@@ -9,13 +9,41 @@
 <body>
 
 	<div class="container">
-	
+
 		<ol th:replace="base :: breadcrumb">
 			<li class="breadcrumb-item">Test</li>
 		</ol>
-			
+		
+		<ul th:replace="base :: messages">
+			<li>Message 1</li>
+		</ul>
+		<div class="row">
+			<div class="panel panel-primary" th:if="${todos}">
 
+				<div class="panel-heading">Todos</div>
+				<div class="panel-body">
 
+					<ul class="list-group">
+						<th:block th:each="todo: ${todos}">
+							<a class="list-group-item"
+								th:href="@{/todos/{id}(id=${todo.id})}"> <span class="badge"
+										th:text="${todo.id}">Id</span> <!-- done --> <span
+										th:if="${todo.done}">
+										<del>
+											<span class="glyphicon glyphicon-check"> </span>
+											<span th:text="${todo.text}">Todo</span>
+										</del>
+									</span> <!-- undone --> <span th:unless="${todo.done}">
+										<em> <span class="glyphicon glyphicon-unchecked"></span>
+											<span th:text="${todo.text}">Todo</span>
+										</em>
+									</span>
+							</a>
+						</th:block>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </body>

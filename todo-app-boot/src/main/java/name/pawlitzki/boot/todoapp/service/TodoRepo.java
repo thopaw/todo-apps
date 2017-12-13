@@ -13,4 +13,6 @@ public interface TodoRepo {
 
 	void save(Todo todo);
 
+	void update(Long todoId, Todo todo);
+
 }

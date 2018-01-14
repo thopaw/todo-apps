@@ -1,20 +1,25 @@
-<template>
-  <div class="container">
-    <h1>Todos</h1>
-    <ul class="list-group">
-      <li class="list-group-item"
-        v-for="item in todos">
-        <Todo
+<template lang="pug">
+  .container
+    h1 Todos!
+    ul.list-group
+      li.list-group-item(v-for="item in todos")
+        Todo(
           v-bind:todo="item"
-          v-bind:key="item.id"/>
-      </li>
-    </ul>
-    <div class="panel panel-primary">
-        <div class="panel-body">
-            <p>Some text</p>
-        </div>
-    </div>
-  </div>
+          v-bind:key="item.id"
+        )
+
+    button(
+      class="btn btn-default"
+      v-on:click="inc()"
+    ) Test
+
+    |
+
+    span
+      |  you clicked
+      |
+      span(v-text="this.counter")
+      |  times
 
 </template>
 
@@ -26,14 +31,18 @@ export default {
   components: {
     Todo
   },
-  data: function ()  {
-    return {
+  methods: {
+    inc: function() {
+      this.counter++
+    }
+  },
+  data: () => ({
+      counter: 0,
       todos: [
         {id: 1, text: "My first Todo", done: false},
         {id: 2, text: "Another Todo", done: false}
       ]
-    }
-  }
+  })
 }
 </script>
 

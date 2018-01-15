@@ -1,9 +1,7 @@
-<template>
-  <div id="app">
-    <div class="boxed">
-      <Todos/>
-    </div>
-  </div>
+<template lang="pug">
+  #app
+    .boxed
+      Todos(:heading="'Todo App with Vue.js!'")
 </template>
 
 <script>
@@ -26,7 +24,8 @@ export default {
   margin-top: 60px;
 }
 .boxed {
-  border: 1px dotted #AAA;
+  border: 3px dotted #AAA;
+  margin: 1em;
   padding: 1em;
 }
 </style>

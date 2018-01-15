@@ -17,3 +17,7 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+Vue.component('test', {
+  template: '<div class="well">Hello World</div>'
+})

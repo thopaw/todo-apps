@@ -1,12 +1,14 @@
 <template lang="pug">
   .container
-    h1 Todos!
+    h1 {{ heading }}
     ul.list-group
       li.list-group-item(v-for="item in todos")
         Todo(
           v-bind:todo="item"
           v-bind:key="item.id"
         )
+
+    TodoForm
 
     button(
       class="btn btn-default"
@@ -24,12 +26,15 @@
 </template>
 
 <script>
+
 import Todo from './Todo'
+import TodoForm from './TodoForm'
 
 export default {
-  name: "Todos",
+  name: 'Todos',
+  props: ['heading'],
   components: {
-    Todo
+    Todo,TodoForm
   },
   methods: {
     inc: function() {

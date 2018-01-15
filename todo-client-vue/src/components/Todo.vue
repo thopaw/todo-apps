@@ -1,6 +1,6 @@
 <template>
   <div>
-    Text: {{ todo.text }}
+    Todo <span v-text="todo.id">id</span>: {{ todo.text }}
   </div>
 </template>
 

@@ -1,26 +1,34 @@
 <template lang="pug">
-div.todo-form
-  h1 Change
-    span.heading(v-text="todo.text")
-  div.form
-    .form-group
-      label(for=text) Todo #
-        span(v-text="todo.id")
-      input.form-control(type=text name=text placeholder="Text of todo" v-model="todo.text")
-    .form-check
-      input.form-check-input(type="checkbox" name="done")
-      label.form-check-label(for="done") Done
-    .text-right
-      button.btn(class="btn-default" v-on:click="cancel()") Cancel
-      button.btn(class="btn-primary" v-on:click="save()") Save
+.panel(class="panel-primary")
+  .panel-heading
+      h1 Change
+        span.heading(v-text="todo.text")
+  .panel-body
+    div.form
+      .form-group
+        label(for=text) Todo #
+          span(v-text="todo.id")
+        input.form-control(type=text name=text placeholder="Text of todo" v-model="todo.text")
+      .form-check
+        input.form-check-input(type="checkbox" name="done" v-model="todo.done")
+        label.form-check-label(for="done") Done
+      .text-right
+        button.btn(class="btn-default" v-on:click="cancel()") Cancel
+        button.btn(class="btn-primary" v-on:click="save()") Save
 
 </template>
 
 <script>
 export default {
   name: 'TodoForm',
+  created() {
+    alert("Created")
+    this._todo = JSON.parse(JSON.stringify(this.todo))
+  },
   props: {
-    todo: {},
+    todo: {
+
+    },
     heading: {
       default: 'New Todo',
       type: String
@@ -35,6 +43,7 @@ export default {
     }
   },
   data: () => ({
+    _todo: {}
   })
 }
 </script>

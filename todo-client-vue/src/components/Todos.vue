@@ -7,6 +7,7 @@
           a.list-group-item(
             v-for="item in todos"
             v-on:click="show(item.id)"
+            v-bind:class="{ active : isActive(item.id)}"
           )
             Todo(
               v-bind:todo="item"
@@ -17,6 +18,7 @@
           v-on:cancel="cancel"
           v-on:save="save"
         )
+    .row
       .col-sm-6
         button.btn(class="btn-info") New Todo
 
@@ -26,9 +28,12 @@
         v-on:click="inc()"
       ) Test
       span
-        |  you clicked
+        = ' '
+        | you clicked
+        = ' '
         span(v-text="this.counter")
-        |  times
+        = ' '
+        | times
 </template>
 
 <script>
@@ -47,10 +52,15 @@ export default {
       this.counter++
     },
     show(index) {
+      this.todoIndex = -1;
       this.todoIndex = index
     },
     selectedTodo() {
       return this.todos.find(t => t.id === this.todoIndex)
+    },
+    isActive(id) {
+      var active = id && this.selectedTodo() && this.selectedTodo().id === id
+      return active
     },
     showTodoForm() {
       return this.selectedTodo() !== undefined
@@ -67,7 +77,7 @@ export default {
       todoIndex: -1,
       todos: [
         {id: 1, text: "My first Todo", done: false},
-        {id: 2, text: "Another Todo", done: false}
+        {id: 2, text: "Another Todo", done: true}
       ]
   })
 }
